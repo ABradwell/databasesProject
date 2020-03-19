@@ -1,11 +1,3 @@
-create table rental_agreements(
-	Rental_id int primary key,
-	Property_id int references properties(Property_id),
-	Signing varchar(25),
-	Start_date timestamp not null,
-	End_date timestamp not null
-);
-
 create table branches(
 	Branch_id int,
 	Country varchar(75),
@@ -15,7 +7,7 @@ create table branches(
 create table employees(
 	Employee_id int primary key,
 	hasPosition varchar(50),
-	Salary double check (Salary >= 0)
+	Salary money check (Salary >= '0.00')
 );
 
 create table reviews(
@@ -52,17 +44,18 @@ create table addresses(
 
 
 Create table People (
-	PersonId int Not null Primary key,
+	Person_id int Not null Primary key,
 	First_name varchar(35) not null,
 	Middle_name varchar(35),
 	Last_name varchar(35) not null,
 	Email varchar(50) not null unique,
 	Phone_Number int not null,
-	Ad_house_number int not null references addresses(House_num),
-	Ad_street varchar(50) not null  references addresses(Street),
-	Ad_city varchar(50) not null  references addresses(City),
-	Ad_province varchar(50) not null  references addresses(Province),
-	Ad_Country varchar(50) not null references addresses(Country)
+	Ad_house_number int not null,
+	Ad_street varchar(50) not null,
+	Ad_city varchar(50) not null,
+	Ad_province varchar(50) not null,
+	Ad_Country varchar(50) not null,
+	foreign key (Ad_house_number,Ad_street,Ad_city,Ad_province,Ad_Country) references addresses(House_num, Street, City, Province, Country)
 );
 create table properties(
 	Property_id int primary key,
@@ -71,18 +64,26 @@ create table properties(
 	Bathrooms int not null check (bathrooms > 0),
 	Bedrooms int not null check (bedrooms > 0),
 	Room_Type varchar(50) not null,
-	Ad_house_number int not null references addresses(House_num),
-	Ad_street varchar(50) not null  references addresses(Street),
-	Ad_city varchar(50) not null  references addresses(City),
-	Ad_province varchar(50) not null  references addresses(Province),
-	Ad_Country varchar(50) not null references addresses(Country)
+	Ad_house_number int not null,
+	Ad_street varchar(50) not null,
+	Ad_city varchar(50) not null,
+	Ad_province varchar(50) not null,
+	Ad_Country varchar(50) not null,
+	foreign key (Ad_house_number,Ad_street,Ad_city,Ad_province,Ad_Country) references addresses(House_num, Street, City, Province, Country)
+);
+create table rental_agreements(
+	Rental_id int primary key,
+	Property_id int references properties(Property_id),
+	Signing varchar(25),
+	Start_date timestamp not null,
+	End_date timestamp not null
+);
+create table hosts(
+	Host_id int not null primary key references people(person_id)
 );
 
-create table pays(
-	Guest_id int references guests(Guest_id),
-	Host_id int references hosts(Host_id),
-	Payment_id int references payments(Payment_id),
-	primary key(Guest_id,Host_id,Payment_id)
+create table guests(
+	Guest_id int not null primary key references people(person_id)
 );
 
 create table payments(
@@ -98,13 +99,7 @@ create table payments(
 		status ='Pending'))
 );
 
-create table hosts(
-	Host_id int not null primary key references people(person_id)
-);
 
-create table guests(
-	Guest_id int not null primary key references people(person_id)
-);
 
 create table books(
 	Booking_id int primary key,
@@ -121,8 +116,10 @@ create table manages(
 
 
 create table employs(
-	Branch_id int references branches(branch_id),
+	Country varchar(75),
+	Branch_id int,
 	Employee_id int references employees(Employee_id),
+	foreign key (Branch_id, Country) references branches(Branch_id, Country),
 	primary key (Branch_id, Employee_id)
 );
 
@@ -130,4 +127,10 @@ create table makes(
 	Guest_id int references guests(Guest_id),
 	Property_id int references properties(Property_id),
 	Review_id int references reviews(Review_id)
+);
+create table pays(
+	Guest_id int references guests(Guest_id),
+	Host_id int references hosts(Host_id),
+	Payment_id int references payments(Payment_id),
+	primary key(Guest_id,Host_id,Payment_id)
 );
