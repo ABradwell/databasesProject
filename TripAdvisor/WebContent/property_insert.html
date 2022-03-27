@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="masterStyleSheet.css">
+		<meta charset="ISO-8859-1">
+		<title>Employee Login</title>
+		<script>
+			function validate() {
+				if(amenities.value == "" || bathrooms.value == "" || bedrooms.value == "" || username.value == "" || 
+					roomType.value == "" || houseNum.value == "" || streetName.value == "" || city.value == "" || 
+					province.value == "" || country.value == "" || propType.value == ""){
+					alert("You need to fill all the information.");
+					return false;
+				}
+				else
+					return true;
+			}
+		</script>
+		<header>
+			<h1 style = "line-height: 25px;  margin-bottom: 0px;color: black; font-size: 25px; padding-bottom: 7px;"> CSI 2132 :: Databases Final Project </h1>
+			<h3 style = "line-height: 15px; margin-bottom: 0px;  font-size: 18px; margin-top: 0px; color: black"> University of Ottawa, Ontario, Canada <br><br></h3> 
+			<h3 style = "margin-top: 0px;margin-left: : 50px;color: black;"> Submitted By 
+				<br> Aiden Stevenson Bradwell || 300064655 || abrad060@uottawa.ca 
+				<br> Abdullah Morrison ||300057314|| amorr128@uottawa.ca 
+				<br> Bryan Edler || 7161340 || bryanedler0@gmail.com </h3>
+				<a href="default.html" class = "buttons" style = "float: center"> RETURN TO HOME </a><br><br>
+				
+		</header>
+	</head>
+
+
+	<body>
+		<h3 style = "color:black"> Create User Account </h3>
+		<form method = "post" action="insertProperty">
+			Username: <input type="text" id="username" name="username"><br><br>
+			Current Address [House Number] [Street Name] [City] [Province] [Country]:<br>
+			<input type="number" id="houseNum" name="houseNum">
+			<input type="text" id="streetName" name="streetName">
+			<input type="text" id="city" name="city">
+			<input type="text" id="province" name="province">
+			<input type="text" id="country" name="country"> 
+			<br><br>
+			Number of bathrooms:<input type="number" id="bathrooms" name="bathrooms"><br><br>
+			Number of bedrooms:<input type="number" id="bedrooms" name="bedrooms"><br><br>
+			Type of Room Listing (Full property, room, loft, etc...)<input type="text" id="roomType" name="roomType"><br><br>
+			Type of Property (Ranch, Condo, House, etc..)<input type="text" id="propType" name="propType"><br><br>
+			Amenities <input type="text" id="amenities" name="amenities"><br><br>
+			<button type="submit" value="submit" onclick="return validate();">Submit</button>
+			<button type="reset" value="reset">Reset</button>
+		</form>
+	</body>
+</html>

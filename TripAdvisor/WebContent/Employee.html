@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<link rel="stylesheet" type="text/css" href="masterStyleSheet.css">
+		<meta charset="ISO-8859-1">
+		<title>Employee Login</title>
+		<script>
+			function validate() {
+				var uname = document.getElementById("uname");
+				var upass = document.getElementById("upass");
+				if(uname.value == ""){
+					alert("username can't be null");
+					return false;
+				}
+				
+				else if(upass.value ==""){
+					alert("password can't be null");
+					return false;
+				}
+				else
+					return true;
+			}
+		</script>
+
+		<header>
+			<h1 style = "line-height: 25px;  margin-bottom: 0px;color: black; font-size: 25px; padding-bottom: 7px;"> CSI 2132 :: Databases Final Project </h1>
+			<h3 style = "line-height: 15px; margin-bottom: 0px;  font-size: 18px; margin-top: 0px; color: black"> University of Ottawa, Ontario, Canada <br><br></h3> 
+			<h3 style = "margin-top: 0px;margin-left: : 50px;color: black;"> Submitted By 
+			<br> Aiden Stevenson Bradwell || 300064655 || abrad060@uottawa.ca 
+			<br> Abdullah Morrison ||300057314|| amorr128@uottawa.ca
+			<br> Bryan Edler || 7161340 || bryanedler0@gmail.com </h3>
+		</header>
+	</head>
+	<body>
+		<h3 style = "color:black"> Employee Log In Credentials </h3>
+		<form name = "loginForm" method="post" action="loginEmployee">
+				 Username:<input type="text" id="uname" name="uname"><br>
+			<br> Password:<input type="password" id="upass" name="upass"><br>
+			<br>
+			<button type="submit" value="submit" onclick="return validate();">submit</button>
+			<button type="reset" value="reset">reset</button>
+		</form>
+	</body>
+</html>
